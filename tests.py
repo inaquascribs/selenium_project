@@ -5,7 +5,7 @@ from selenium import webdriver
 
 
 
-class Wizztest(unittest.TestCase, basic_code.FillRegistration):
+class Wizztest(unittest.TestCase, basic_code.Registration):
     def setUp(self):
         self.driver = webdriver.Chrome().get("https://wizzair.com/pl-pl#/")
   #      self.driver.maximize_window()

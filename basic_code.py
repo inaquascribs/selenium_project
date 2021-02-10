@@ -7,11 +7,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-class ReachRegistraion:
-    #czy to tutaj, czy gdzie indziej? Muszę gdziesz jeszcze Firefox i Safari zrobić
-#    self.driver = webdriver.Chrome().get("https://wizzair.com/pl-pl#/")
-#    self.driver.maximize_window()
+class Registration:
+    # todo czy to tutaj, czy gdzie indziej? Muszę gdziesz jeszcze Firefox i Safari zrobić
+    driver = webdriver.Chrome().get("https://wizzair.com/pl-pl#/")
+
     def go_to_registration_page(self):
+        self.driver.maximize_window()
         wait = WebDriverWait(self.driver,60)
         login_btn = wait.until(
             EC.element_to_be_clickable((By.XPATH, '//button[@data-test="navigation-menu-signin"]')))
@@ -19,10 +20,10 @@ class ReachRegistraion:
         register_btn = wait.until(
             EC.element_to_be_clickable((By.XPATH, '//button[@data-test="registration"]')))
         register_btn.click()
-class FillRegistration(ReachRegistraion):
+#class FillRegistration(ReachRegistraion):
     def name(self):
         #in data_generation code in define name by gender
-        #czy ta metoda i metoda gender będą lecieć osobno? ujednolicić gender tu i w metodzie gender
+        # todo czy ta metoda i metoda gender będą lecieć osobno? ujednolicić gender tu i w metodzie gender
         name_field = self.driver.find_element_by_name("firstName")
         name_field.send_keys(data_generation.name_by_gender())
         pass
@@ -45,7 +46,7 @@ class FillRegistration(ReachRegistraion):
         self.driver.find_element_by_name(
             'phone-number-country-code').send_keys(data_generation.country_phone_code + Keys.RETURN)
     def phone(self):
-        #zmień zmienną w danych, GB i PL. Uwarunkuj długości numerów
+        # todo zmień zmienną w danych, GB i PL. Uwarunkuj długości numerów
         self.driver.find_element_by_name("phoneNumberValidDigits").send_keys(data_generation.phone_number)
     def email(self):
         self.driver.find_element_by_xpath('//input[@data-test="booking-register-email"]').send_keys(
