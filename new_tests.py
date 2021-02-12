@@ -19,5 +19,14 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.gender(data_generation.gender)
         #print(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
+        self.phone(data_generation.phone_number)
+        self.email(data_generation.mail)
+        self.generate_password(data_generation.password)
+        self.nationality(data_generation.country_code)
+        self.terms_conditions()
+        self.privacy_policy()
+        self.newsletter()
+
+
 
         sleep(10)

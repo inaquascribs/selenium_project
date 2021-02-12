@@ -51,9 +51,6 @@ class BaseView(unittest.TestCase):
             actions.move_to_element_with_offset(sex,1,2)
         else:
             actions = ActionChains(self.driver)
-            # unclick = self.driver.find_element_by_name("firstName")
-            # actions.move_to_element(unclick).click().perform()
-            # actions.move_to_element_with_offset(unclick,1,2)
             self.driver.find_element_by_xpath(
                 '//div[@data-test="booking-register-country-code"]').click()
             sex = self.driver.find_element_by_xpath('//label[@data-test="register-gendermale"]')
@@ -61,13 +58,62 @@ class BaseView(unittest.TestCase):
             actions.move_to_element_with_offset(sex, 1, 2)
 
     def country_code(self,country_phone_code):
+        # todo actions - make it general
+        # actions = ActionChains(self.driver)
+        # country_code_click = self.driver.find_element_by_xpath(
+        #     '//div[@data-test="booking-register-country-code"]')
+        # actions.move_to_element(country_code_click).click().perform()
+        # actions.move_to_element_with_offset(country_code_click,1,2)
         self.driver.find_element_by_xpath(
-            '//div[@data-test="booking-register-country-code"]').click()
+                 '//div[@data-test="booking-register-country-code"]').click()
         self.driver.find_element_by_name(
             'phone-number-country-code').send_keys(country_phone_code + Keys.RETURN)
 
+    def phone(self,phone_number):
+        # todo zmień zmienną w danych, GB i PL. Uwarunkuj długości numerów
+        self.driver.find_element_by_name("phoneNumberValidDigits").send_keys(phone_number)
+
+    def email(self,mail):
+        self.driver.find_element_by_xpath('//input[@data-test="booking-register-email"]').send_keys(
+            mail + Keys.RETURN)
+
+    def generate_password(self, password):
+        password_input = self.driver.find_element_by_xpath('//input[@data-test="booking-register-password"]')
+        password_input.send_keys(password)
+
+    def nationality(self,country_code):
+        self.driver.find_element_by_xpath('//input[@data-test="booking-register-country"]').click()
+        country_container = self.driver.find_element_by_xpath(
+            '//div[@class="register-form__country-container__locations"]')
+        countries = country_container.find_elements_by_tag_name('label')
+        for country in countries:
+            option = country.find_element_by_tag_name('small')
+            option.get_attribute('innerText')
+            if option.get_attribute('innerText') == country_code:
+                # scroll to element
+                option.location_once_scrolled_into_view
+                # clicl
+                option.click()
+                # leave loop
+                break
 
 
+    def privacy_policy(self):
+        action = ActionChains(self.driver)
+        policy_checkbox = self.driver.find_element_by_xpath('//label[@for="checkbox-privacyPolicy"]/i')
+        action.move_to_element(policy_checkbox).click().perform()
 
+    def terms_conditions(self):
+        action = ActionChains(self.driver)
+        terms_and_conditions_checkbox = self.driver.find_element_by_xpath(
+            '//label[@for="checkbox-wizzAccountPolicy"]/i')
+        action.move_to_element(terms_and_conditions_checkbox).click().perform()
+
+    def newsletter(self):
+        action = ActionChains(self.driver)
+        newsletter_checkbox = self.driver.find_element_by_name(
+            'newsletter')
+        action.move_to_element(newsletter_checkbox).click().perform()
+        action.move_to_element_with_offset(newsletter_checkbox,1,2)
 
     sleep(10)
