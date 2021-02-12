@@ -13,9 +13,11 @@ from selenium.webdriver.common.keys import Keys
 class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
 
     def testInsertEmptyName(self):
-        #self.name_field.send_keys(data_generation.name_by_gender())
+        self.firstName("")
+        self.lastName(data_generation.lastname)
+        #print(data_generation.lastname)
+        self.gender(data_generation.gender)
+        #print(data_generation.gender)
+        self.country_code(data_generation.country_phone_code)
 
-        # click_name = wait.until(
-        #         EC.element_to_be_clickable((By.NAME, 'firstName')))
-        self.firstName(""+ Keys.RETURN)
         sleep(10)

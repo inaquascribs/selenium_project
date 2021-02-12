@@ -4,12 +4,16 @@ from faker_e164.providers import E164Provider
 fake = Faker(['pl_PL'])
 
 #person data
-def name_by_gender(self):
-    self.gender = fake.random_element(['male','female'])
-    if self.gender == 'male':
-        self.firstname = fake.first_name_male()
+gender = fake.random_element(['male','female'])
+
+def name_by_gender():
+    if gender == 'male':
+        firstname = fake.first_name_male()
     else:
-        self.firstname = fake.first_name_female()
+        firstname = fake.first_name_female()
+    return firstname
+
+
 
 lastname = fake.last_name()
 
