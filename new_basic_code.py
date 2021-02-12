@@ -51,12 +51,14 @@ class BaseView(unittest.TestCase):
             actions.move_to_element_with_offset(sex,1,2)
         else:
             actions = ActionChains(self.driver)
-            unclick = self.driver.find_element_by_name("firstName")
-            actions.move_to_element(unclick).click().perform()
-            actions.move_to_element_with_offset(unclick,1,2)
+            # unclick = self.driver.find_element_by_name("firstName")
+            # actions.move_to_element(unclick).click().perform()
+            # actions.move_to_element_with_offset(unclick,1,2)
+            self.driver.find_element_by_xpath(
+                '//div[@data-test="booking-register-country-code"]').click()
             sex = self.driver.find_element_by_xpath('//label[@data-test="register-gendermale"]')
             actions.move_to_element(sex).click().perform()
-            actions.move_to_element_with_offset(sex, 2, 4)
+            actions.move_to_element_with_offset(sex, 1, 2)
 
     def country_code(self,country_phone_code):
         self.driver.find_element_by_xpath(
