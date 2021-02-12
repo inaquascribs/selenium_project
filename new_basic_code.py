@@ -45,14 +45,18 @@ class BaseView(unittest.TestCase):
 
     def gender(self,gender):
         if gender == 'female':
-            #sex = self.driver.find_element_by_xpath('//label[@data-test="register-genderfemale"]')
-            self.driver.find_element_by_xpath('//label[@data-test="register-genderfemale"]').click()
-            #sex.click()
+            actions = ActionChains(self.driver)
+            sex = self.driver.find_element_by_xpath('//label[@data-test="register-genderfemale"]')
+            actions.move_to_element(sex).click().perform()
+            actions.move_to_element_with_offset(sex,1,2)
         else:
-            self.driver.find_element_by_name("firstName").click()
-            #sex = self.driver.find_element_by_xpath('//label[@data-test="register-gendermale"]')
-            self.driver.find_element_by_xpath('//label[@data-test="register-gendermale"]').click()
-            #sex.click()
+            actions = ActionChains(self.driver)
+            unclick = self.driver.find_element_by_name("firstName")
+            actions.move_to_element(unclick).click().perform()
+            actions.move_to_element_with_offset(unclick,1,2)
+            sex = self.driver.find_element_by_xpath('//label[@data-test="register-gendermale"]')
+            actions.move_to_element(sex).click().perform()
+            actions.move_to_element_with_offset(sex, 2, 4)
 
     def country_code(self,country_phone_code):
         self.driver.find_element_by_xpath(
