@@ -1,7 +1,7 @@
 from faker import Faker
 from faker_e164.providers import E164Provider
 
-fake = Faker(['pl_PL'])
+fake = Faker(['en_GB'])
 
 #person data
 gender = fake.random_element(['male','female'])
@@ -31,7 +31,7 @@ fake.add_provider(E164Provider)
 phone_number = fake.phone_number()
 
 #email
-mail = fake.ascii_free_email()
+mail = fake.email()
 #password
-password = fake.password(length=10, special_chars=True, digits=True, upper_case=True, lower_case=True)
+password = fake.password(length=10, digits=True, upper_case=True, lower_case=True, special_chars = False)
 

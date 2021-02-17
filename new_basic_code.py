@@ -42,6 +42,7 @@ class BaseView(unittest.TestCase):
     def lastName(self,surname_field):
         surname = self.driver.find_element_by_name("lastName")
         surname.send_keys(surname_field)
+        self.driver.find_element_by_name("firstName").click()
 
     def gender(self,gender):
         if gender == 'female':
@@ -75,11 +76,13 @@ class BaseView(unittest.TestCase):
 
     def email(self,mail):
         self.driver.find_element_by_xpath('//input[@data-test="booking-register-email"]').send_keys(
-            mail + Keys.RETURN)
+            mail)
 
     def generate_password(self, password):
         password_input = self.driver.find_element_by_xpath('//input[@data-test="booking-register-password"]')
-        password_input.send_keys(password)
+        password_input.send_keys(password+Keys.TAB)
+        sleep(10)
+        #password_input.click()
 
     def nationality(self,country_code):
         self.driver.find_element_by_xpath('//input[@data-test="booking-register-country"]').click()
@@ -99,6 +102,7 @@ class BaseView(unittest.TestCase):
 
 
     def privacy_policy(self):
+        #self.driver.find_element_by_xpath('//input[@data-test="booking-register-password"]').click()
         action = ActionChains(self.driver)
         policy_checkbox = self.driver.find_element_by_xpath('//label[@for="checkbox-privacyPolicy"]/i')
         action.move_to_element(policy_checkbox).click().perform()
@@ -115,5 +119,12 @@ class BaseView(unittest.TestCase):
             'newsletter')
         action.move_to_element(newsletter_checkbox).click().perform()
         action.move_to_element_with_offset(newsletter_checkbox,1,2)
+
+    # def error_list(self):
+    #     error_notices = self.driver.find_elements_by_xpath('//span[@class="input-error__message"]/span')
+    #     visible_error_notices = []
+    #     for error in error_notices:
+    #         if error.is_displayed():
+    #             visible_error_notices.append(error)
 
     sleep(10)
