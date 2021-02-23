@@ -17,7 +17,8 @@ def name_by_gender():
         firstname = fake.first_name_female()
     return firstname
 # name_by_gender()
-
+polish_letters = fake.bothify(text='??????', letters='ążźęćśńół')
+#print(polish_letters)
 lastname = fake.last_name()
 
 # country, adress
@@ -45,7 +46,7 @@ def generate_phone_number():
 mail = fake.email()
 wrong_mail = fake.bothify(text='??????') + "@" + fake.bothify(text='??.##')
 
-print(wrong_mail)
+#print(wrong_mail)
 #password
 password = fake.password(length=10, digits=True, upper_case=True, lower_case=True, special_chars = False)
 
