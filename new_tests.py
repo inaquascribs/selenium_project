@@ -6,11 +6,6 @@ import data_generation
 from faker import Faker
 fake = Faker()
 
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-
-from selenium.webdriver.common.keys import Keys
 
 
 class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
@@ -22,7 +17,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.gender(data_generation.gender)
         #print(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -54,7 +49,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName("")
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -84,7 +79,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.firstName(data_generation.name_by_gender())
         self.lastName(data_generation.lastname)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -113,7 +108,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
 
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -222,7 +217,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(fake.lexify())
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -249,7 +244,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.wrong_mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -276,7 +271,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(fake.lexify())
         self.nationality(data_generation.country_code)
@@ -304,7 +299,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.terms_conditions()
@@ -330,7 +325,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -355,7 +350,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
@@ -378,7 +373,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         self.lastName(data_generation.lastname)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
-        self.phone(data_generation.phone_number)
+        self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
         self.generate_password(data_generation.password)
         self.nationality(data_generation.country_code)
