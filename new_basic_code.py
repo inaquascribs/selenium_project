@@ -34,7 +34,6 @@ class BaseView(unittest.TestCase):
 
     def firstName(self,name_field):
         # in data_generation code in define name by gender
-        # todo czy ta metoda i metoda gender będą lecieć osobno? ujednolicić gender tu i w metodzie gender\
         click_name = self.wait.until(
             EC.element_to_be_clickable((By.NAME, 'firstName')))
         click_name = self.driver.find_element_by_name("firstName").send_keys(name_field)

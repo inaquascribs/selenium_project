@@ -1,19 +1,22 @@
 from faker import Faker
 from faker_e164.providers import E164Provider
 
-fake = Faker(['en_GB'])
+PL = 'pl_PL'
+UK = 'en_GB'
+
+fake = Faker([PL])
 
 #person data
 gender = fake.random_element(['male','female'])
 
 def name_by_gender():
+ #   fake = Faker([UK])
     if gender == 'male':
         firstname = fake.first_name_male()
     else:
         firstname = fake.first_name_female()
     return firstname
-
-
+# name_by_gender()
 
 lastname = fake.last_name()
 
@@ -28,10 +31,21 @@ city = fake.city()
 #phone
 country_phone_code = fake.country_calling_code()
 fake.add_provider(E164Provider)
-phone_number = fake.phone_number()
+
+def generate_phone_number():
+    if fake == Faker([PL]):
+        phone_number = fake.numerify(text='#########')
+    else:
+        phone_number = fake.numerify(text='##########')
+    return phone_number
+
 
 #email
+
 mail = fake.email()
+wrong_mail = fake.bothify(text='??????') + "@" + fake.bothify(text='??.##')
+
+print(wrong_mail)
 #password
 password = fake.password(length=10, digits=True, upper_case=True, lower_case=True, special_chars = False)
 
