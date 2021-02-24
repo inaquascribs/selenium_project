@@ -4,7 +4,7 @@ from faker_e164.providers import E164Provider
 PL = 'pl_PL'
 UK = 'en_GB'
 
-fake = Faker([PL])
+fake = Faker([UK])
 
 #person data
 gender = fake.random_element(['male','female'])
@@ -47,7 +47,6 @@ def generate_phone_number():
     else:
         phone_number = fake.numerify(text='##########')
     return phone_number
-
 
 #email
 

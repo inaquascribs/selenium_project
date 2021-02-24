@@ -40,9 +40,9 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
                             'Wpisz imię pasażera w formie, w której zostało przedstawione w dokumencie podróżnym. Należy używać tylko liter alfabetu łacińskiego, bez znaków diakrytycznych (np.: á, é, ő) i unikać używania znaków specjalnych!')
         else:
             self.assertEqual(visible_error_notices[0].text,
-                             "Please add the passenger's first name as it appears in their travel document. Please use letters without accents (e.g.: á, é, ő) and avoid using special characters!")
+                             "Please add the passenger's first name as it appears in their travel document.\nPlease use letters without accents (e.g.: á, é, ő) and avoid using special characters!")
 
-        sleep(10)
+        #sleep(10)
 
     def testInsertSpecialLettersFirstName(self):
         # insert correct and incorrect data
@@ -106,8 +106,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
                          'Wpisz nazwisko pasażera w formie, w której zostało przedstawione w dokumencie podróżnym. Należy używać tylko liter alfabetu łacińskiego, bez znaków diakrytycznych (np.: á, é, ő) i unikać używania znaków specjalnych!')
         else:
             self.assertEqual(visible_error_notices[0].text,
-                             "Please add the passenger's first name as it appears in their travel document. Please use letters without accents (e.g.: á, é, ő) and avoid using special characters!")
-
+                             "Please add the passenger's last name as it appears in their travel document.\nPlease use letters without accents (e.g.: á, é, ő) and avoid using special characters!")
 
     def testInsertSpecialLettersSurname(self):
         # insert correct and incorrect data
@@ -140,7 +139,6 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         else:
             self.assertEqual(visible_error_notices[0].text, 'Invalid character')
 
-
     def testNoGenderSelect(self):
         # insert correct and incorrect data
         self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
@@ -170,7 +168,6 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
             self.assertEqual(visible_error_notices[0].text, 'Wybierz')
         else:
             self.assertEqual(visible_error_notices[0].text, 'Please select')
-
 
     def testNoCountryCode(self):
         # insert correct and incorrect data
@@ -232,8 +229,7 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
             self.assertEqual(visible_error_notices[0].text, 'Podaj numer telefonu')
         else:
             self.assertEqual(visible_error_notices[0].text, 'Please add a valid mobile phone number')
-
-
+        sleep(10)
 
     def testWrongPhoneNumber(self):
     # insert correct and incorrect data
@@ -326,8 +322,6 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         else:
             self.assertEqual(visible_error_notices[0].text,  'Invalid e-mail')
 
-
-
     def testWrongEmailDomain(self):
         self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
         self.lastName(data_generation.removeAccents(data_generation.lastname))
@@ -388,7 +382,6 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         else:
             self.assertEqual(visible_error_notices[0].text, "Please add your password")
 
-
     def testNoNationality(self):
         self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
         self.lastName(data_generation.removeAccents(data_generation.lastname))
@@ -416,8 +409,6 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
             self.assertEqual(visible_error_notices[0].text, 'Ten kraj nie istnieje.')
         else:
             self.assertEqual(visible_error_notices[0].text, 'This is a non-existing country.')
-
-
 
     def testNoNewsletter(self):
         self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
@@ -469,8 +460,6 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
             self.assertEqual(visible_error_notices[0].text, 'Aby kontynuować, musisz wyrazić zgodę na zasady i warunki konta WIZZ.')
         else:
             self.assertEqual(visible_error_notices[0].text, 'You must accept the WIZZ Account Terms and Conditions to continue.')
-
-
 
     def testNoPrivacyPolicy(self):
         self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
