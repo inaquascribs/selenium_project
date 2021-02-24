@@ -12,10 +12,8 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
     def testInsertEmptyName(self):
         #insert correct and incorrect data
         self.firstName("")
-        self.lastName(data_generation.lastname)
-        #print(data_generation.lastname)
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
-        #print(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
@@ -37,16 +35,19 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,
-                         'Wpisz imię pasażera w formie, w której zostało przedstawione w dokumencie podróżnym. Należy używać tylko liter alfabetu łacińskiego, bez znaków diakrytycznych (np.: á, é, ő) i unikać używania znaków specjalnych!')
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text,
+                            'Wpisz imię pasażera w formie, w której zostało przedstawione w dokumencie podróżnym. Należy używać tylko liter alfabetu łacińskiego, bez znaków diakrytycznych (np.: á, é, ő) i unikać używania znaków specjalnych!')
+        else:
+            self.assertEqual(visible_error_notices[0].text,
+                             "Please add the passenger's first name as it appears in their travel document. Please use letters without accents (e.g.: á, é, ő) and avoid using special characters!")
 
-
- #       sleep(10)
+        sleep(10)
 
     def testInsertSpecialLettersFirstName(self):
         # insert correct and incorrect data
         self.firstName(data_generation.polish_letters)
-        self.lastName(data_generation.lastname)
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -69,12 +70,14 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-
-        self.assertEqual(visible_error_notices[0].text, 'Nieprawidłowy znak')
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Nieprawidłowy znak')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Invalid character')
 
     def testInsertEmptySurname(self):
         # insert correct and incorrect data
-        self.firstName(data_generation.name_by_gender())
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
         self.lastName("")
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
@@ -98,12 +101,17 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text,
                          'Wpisz nazwisko pasażera w formie, w której zostało przedstawione w dokumencie podróżnym. Należy używać tylko liter alfabetu łacińskiego, bez znaków diakrytycznych (np.: á, é, ő) i unikać używania znaków specjalnych!')
+        else:
+            self.assertEqual(visible_error_notices[0].text,
+                             "Please add the passenger's first name as it appears in their travel document. Please use letters without accents (e.g.: á, é, ő) and avoid using special characters!")
+
 
     def testInsertSpecialLettersSurname(self):
         # insert correct and incorrect data
-        self.firstName(data_generation.name_by_gender())
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
         self.lastName(data_generation.polish_letters)
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
@@ -127,12 +135,16 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text, 'Nieprawidłowy znak')
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Nieprawidłowy znak')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Invalid character')
+
 
     def testNoGenderSelect(self):
         # insert correct and incorrect data
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
         self.email(data_generation.mail)
@@ -154,12 +166,16 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,"Wybierz")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Wybierz')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Please select')
+
 
     def testNoCountryCode(self):
         # insert correct and incorrect data
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
 
         self.phone(data_generation.generate_phone_number())
@@ -182,12 +198,15 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,"Wybierz")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Wybierz')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Please select')
 
     def testNoPhoneNumber(self):
     # insert correct and incorrect data
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.email(data_generation.mail)
@@ -209,12 +228,17 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text, 'Podaj numer telefonu')
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Podaj numer telefonu')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Please add a valid mobile phone number')
+
+
 
     def testWrongPhoneNumber(self):
     # insert correct and incorrect data
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.name_by_gender())
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.name_by_gender()))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(fake.lexify())
@@ -237,11 +261,14 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        #self.assertEqual(visible_error_notices[0].text,'Podaj prawidłowy numer telefonu')
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Podaj numer telefonu')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Please add a valid mobile phone number')
 
     def testEmptyPhoneNumber(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.name_by_gender())
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.name_by_gender()))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone('      ')
@@ -264,11 +291,14 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        # self.assertEqual(visible_error_notices[0].text,'Podaj prawidłowy numer telefonu')
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Podaj numer telefonu')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Please add a valid mobile phone number')
 
     def testWrongEmail(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -291,11 +321,16 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,"Nieprawidłowy adres e-mail.")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, "Nieprawidłowy adres e-mail")
+        else:
+            self.assertEqual(visible_error_notices[0].text,  'Invalid e-mail')
+
+
 
     def testWrongEmailDomain(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -318,11 +353,14 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,"Nieprawidłowy adres e-mail")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, "Nieprawidłowy adres e-mail")
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'Invalid e-mail')
 
     def testWrongPassword(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -345,11 +383,15 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text,"Wpisz hasło")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, "Wpisz hasło")
+        else:
+            self.assertEqual(visible_error_notices[0].text, "Please add your password")
+
 
     def testNoNationality(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -370,11 +412,16 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
-        self.assertEqual(visible_error_notices[0].text, "Podaj kraj")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Ten kraj nie istnieje.')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'This is a non-existing country.')
+
+
 
     def testNoNewsletter(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -396,8 +443,8 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         assert len(visible_error_notices) == 0
 
     def testNoTermsConditions(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -418,9 +465,16 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
 
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text, 'Aby kontynuować, musisz wyrazić zgodę na zasady i warunki konta WIZZ.')
+        else:
+            self.assertEqual(visible_error_notices[0].text, 'You must accept the WIZZ Account Terms and Conditions to continue.')
+
+
+
     def testNoPrivacyPolicy(self):
-        self.firstName(data_generation.name_by_gender())
-        self.lastName(data_generation.lastname)
+        self.firstName(data_generation.removeAccents(data_generation.name_by_gender()))
+        self.lastName(data_generation.removeAccents(data_generation.lastname))
         self.gender(data_generation.gender)
         self.country_code(data_generation.country_phone_code)
         self.phone(data_generation.generate_phone_number())
@@ -440,3 +494,11 @@ class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
             print(v.text)
         print(len(visible_error_notices))
         assert len(visible_error_notices) == 1
+
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.assertEqual(visible_error_notices[0].text,
+                             'Aby kontynuować, musisz wyrazić zgodę na politykę prywatności.')
+        else:
+            self.assertEqual(visible_error_notices[0].text,
+                             'You must accept the privacy policy to continue.')
+

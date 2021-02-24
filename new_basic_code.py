@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 import data_generation
 
 from time import sleep
+from faker import Faker
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -19,7 +20,10 @@ class BaseView(unittest.TestCase):
     def setUp(self):
 
         self.driver = webdriver.Chrome()
-        self.driver.get("https://wizzair.com/pl-pl#/")
+        if data_generation.fake.locales == ["pl_PL"]:
+            self.driver.get("https://wizzair.com/pl-pl#/")
+        else:
+            self.driver.get("https://wizzair.com/en-gb#/")
         self.driver.maximize_window()
         self.wait = WebDriverWait(self.driver, 60)
         login_btn = self.wait.until(
@@ -58,19 +62,17 @@ class BaseView(unittest.TestCase):
             actions.move_to_element_with_offset(sex, 1, 2)
 
     def country_code(self,country_phone_code):
-        # todo actions - make it general
-        # actions = ActionChains(self.driver)
-        # country_code_click = self.driver.find_element_by_xpath(
-        #     '//div[@data-test="booking-register-country-code"]')
-        # actions.move_to_element(country_code_click).click().perform()
-        # actions.move_to_element_with_offset(country_code_click,1,2)
-        self.driver.find_element_by_xpath(
-                 '//div[@data-test="booking-register-country-code"]').click()
+        actions = ActionChains(self.driver)
+        country_code_click = self.driver.find_element_by_xpath(
+            '//div[@data-test="booking-register-country-code"]')
+        actions.move_to_element(country_code_click).click().perform()
+        actions.move_to_element_with_offset(country_code_click,1,2)
+        # self.driver.find_element_by_xpath(
+        #          '//div[@data-test="booking-register-country-code"]').click()
         self.driver.find_element_by_name(
             'phone-number-country-code').send_keys(country_phone_code + Keys.RETURN)
 
     def phone(self,phone_number):
-        # todo zmień zmienną w danych, GB i PL. Uwarunkuj długości numerów
         self.driver.find_element_by_name("phoneNumberValidDigits").send_keys(phone_number)
 
     def email(self,mail):
