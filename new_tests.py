@@ -4,11 +4,10 @@ from time import sleep
 import new_basic_code
 import data_generation
 from faker import Faker
-fake = Faker()
+fake = Faker
 
 
-
-class EnterEmptyName(new_basic_code.BaseView, unittest.TestCase):
+class RegistrationForm(new_basic_code.BaseView, unittest.TestCase):
     def testInsertEmptyName(self):
         #insert correct and incorrect data
         self.firstName("")

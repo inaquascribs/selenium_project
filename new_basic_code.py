@@ -6,7 +6,6 @@ from selenium.webdriver.common.keys import Keys
 import data_generation
 
 from time import sleep
-from faker import Faker
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
