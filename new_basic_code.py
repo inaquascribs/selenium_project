@@ -13,9 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 class BaseView(unittest.TestCase):
-    # should driver be global, or is it enough to be only in setup?
-    #global driver
-    #driver = webdriver.Chrome().get("https://wizzair.com/pl-pl#/")
+
 
     def setUp(self):
 
@@ -124,11 +122,5 @@ class BaseView(unittest.TestCase):
         action.move_to_element(newsletter_checkbox).click().perform()
         action.move_to_element_with_offset(newsletter_checkbox,1,2)
 
-    # def error_list(self):
-    #     error_notices = self.driver.find_elements_by_xpath('//span[@class="input-error__message"]/span')
-    #     visible_error_notices = []
-    #     for error in error_notices:
-    #         if error.is_displayed():
-    #             visible_error_notices.append(error)
 
     sleep(10)
